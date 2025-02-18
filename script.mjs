@@ -2,7 +2,7 @@ import express from 'express';
 import path from 'path';
 // import cors from 'cors';
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 
 const __dirname = path.resolve();
 
@@ -19,6 +19,7 @@ app.get('/profile',(req,res)=>{
     city: 'Karachi'
   })
 })
+
 app.get('/post',(req,res)=>{
   res.send('This is my post')
 })
@@ -80,6 +81,11 @@ app.get('/weather/:cityName',(req,res)=>{
 
 app.use('/', express.static(path.join(__dirname, 'public')))
 
+
+
+app.get('/users', (req, res) => {
+  res.send('Arif, Akmal, Zahid, Faris, Hamza, Haris')
+})
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
