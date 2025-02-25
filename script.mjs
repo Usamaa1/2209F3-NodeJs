@@ -1,3 +1,4 @@
+import exp from 'constants';
 import express from 'express';
 import path from 'path';
 // import cors from 'cors';
@@ -5,6 +6,8 @@ const app = express()
 const port = process.env.PORT || 3000
 
 const __dirname = path.resolve();
+
+app.use(express.json());
 
 // app.use(cors());
 
@@ -23,6 +26,8 @@ app.get('/profile',(req,res)=>{
 app.get('/post',(req,res)=>{
   res.send('This is my post')
 })
+
+
 
 app.get('/weather/:cityName',(req,res)=>{
 
@@ -86,6 +91,79 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 app.get('/users', (req, res) => {
   res.send('Arif, Akmal, Zahid, Faris, Hamza, Haris')
 })
+
+
+app.use('/employee',express.static(path.join(__dirname,'public/post.html')));
+
+
+
+const employeeArray = [];
+app.post('/employeeAdd',(req,res)=>{
+
+  let data =  req.body;
+  employeeArray.push(data);
+
+  console.log(employeeArray)
+
+  res.send({message:'Added Successfully'})
+})
+
+
+app.get('/employeeGet',(req,res)=>{
+  res.send(employeeArray);
+});
+
+app.get('/vsCode',(req,res)=>{
+  res.download(path.join(__dirname,"public/softwares/VSCode.exe"))
+})
+
+console.log(__dirname)
+app.get('/myImage',(req,res)=>{
+  res.sendFile(path.join(__dirname,"public/image/1.jpg"));
+});
+
+
+
+
+
+// comments
+
+// get-> /comments
+// get-> /comment
+// post-> /comment
+// put-> /comment/:id
+// delete-> /comment/:id
+
+
+// posts
+
+// users
+
+// likes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
