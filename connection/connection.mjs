@@ -38,4 +38,4 @@ process.on('SIGINT', async () => {
   console.log('🛑 MongoDB connection closed');
   process.exit(1);
 });
-export const database = client.db("ordinaryDB");
+export const database = client.db("test");

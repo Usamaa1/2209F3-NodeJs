@@ -7,7 +7,6 @@ const signupRouter = express.Router();
 
 signupRouter.post('/signup', async (req, res) => {
 
-
     if (
         !req.body.firstName ||
         !req.body.lastName ||
@@ -19,12 +18,8 @@ signupRouter.post('/signup', async (req, res) => {
     }
 
 
-
-
-
     try {
         const haiku = database.collection("2209F3CL");
-
 
        let foundEmail = await haiku.findOne({email: req.body.email})
        console.log(foundEmail)
@@ -48,9 +43,7 @@ signupRouter.post('/signup', async (req, res) => {
             res.send(`A User was created with the _id: ${result.insertedId}`);
         });
 
-
         // Insert the defined document into the "haiku" collection
-
    
         // Print the ID of the inserted document
         console.log(`A document was inserted with the _id: ${result.insertedId}`);
