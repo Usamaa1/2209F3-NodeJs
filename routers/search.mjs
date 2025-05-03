@@ -19,7 +19,7 @@ const searchRouter = express.Router();
           }).toArray();
           // const products = await Product.find({}).toArray();
 
-          // console.log(products)
+          console.log(products)
           res.send(products);
         } catch (err) {
           console.log(err)
