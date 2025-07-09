@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Employee Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+    <h1 class="text-center">Employee Management</h1>
+    <div class="container">
+        <form class="row g-3" id="employeeForm">
+            <div class="col-md-12">
+                <label for="userName" class="form-label">User Name</label>
+                <input type="text" class="form-control" id="userName">
+            </div>
+            <div class="col-md-12">
+                <label for="userEmail" class="form-label">User Email</label>
+                <input type="text" class="form-control" id="userEmail">
+            </div>
+            <div class="col-md-12">
+                <label for="userDesignation" class="form-label">User Designation</label>
+                <input type="text" class="form-control" id="userDesignation">
+            </div>
+            <div class="col-md-12">
+                <label for="userPhone" class="form-label">User Phone</label>
+                <input type="text" class="form-control" id="userPhone">
+            </div>
+            <div class="col-12">
+                <button type="submit" id="btn" class="btn btn-primary">Add Employee</button>
+            </div>
+        </form>
+
+        <div class="card" id="tempCardContainer">
+
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+        
+        
+        let employeeForm = document.getElementById('employeeForm');
+        
+        // let tempCardContainer = document.getElementById('tempCardContainer');
+        // tempCardContainer.style.display = 'none';
+        
+        employeeForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+                    let userName = document.getElementById('userName').value;
+                    let userEmail = document.getElementById('userEmail').value;
+                    let userDesignation = document.getElementById('userDesignation').value;
+                    let userPhone = document.getElementById('userPhone').value;
+
+            try {
+
+                await axios.post('http://localhost:3000/employeeAdd', {
+                    userName,
+                    userEmail,
+                    userDesignation,
+                    userPhone
+                })
+
+            } catch (error) {
+                console.error(error);
+            }
+        })
+
+
+        async function employeeGet() {
+            try
+            {
+                const response = await axios.get(`http://localhost:3000/employeeGet`);
+                console.log(response);
+
+            }
+            catch(error)
+            {
+                console.error(error);
+            }
+        }
+        employeeGet()
+
+    </script>
+</body>
+
+</html>
